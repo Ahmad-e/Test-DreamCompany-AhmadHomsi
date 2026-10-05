@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 interface NavbarProps {
@@ -11,6 +11,17 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount = 3 }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setIsMobileMenuOpen(false);
+        };
+
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [isMobileMenuOpen]);
 
     return (
         <header className="metro bg-white   sticky top-0 z-50">
@@ -24,6 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCo
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             className="toggle-nav lg:hidden text-gray-700 hover:text-primary-500 focus:outline-none"
                             aria-label="Toggle Navigation Menu"
+                            aria-expanded={isMobileMenuOpen}
+                            aria-controls="mobile-navigation-drawer"
                         >
                             <svg aria-hidden="true" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -155,14 +168,43 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCo
 
             {/* Mobile Navigation Drawer / Menu */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-3 shadow-lg">
-                    <div className="container mx-auto space-y-3">
-                        <Link href="/" className="block text-gray-800 font-medium py-1 hover:text-primary-500">Home</Link>
-                        <Link href="/multikart-frontend/collections" className="block text-gray-800 font-medium py-1 hover:text-primary-500">Collection</Link>
-                        <Link href="/multikart-frontend/products" className="block text-gray-800 font-medium py-1 hover:text-primary-500">Product</Link>
-                        <Link href="/multikart-frontend/blogs" className="block text-gray-800 font-medium py-1 hover:text-primary-500">Blogs</Link>
-                        <Link href="/multikart-frontend/pages" className="block text-gray-800 font-medium py-1 hover:text-primary-500">Pages</Link>
-                    </div>
+                <div className="mobile-menu-overlay fixed inset-0 z-[60] lg:hidden" onClick={() => setIsMobileMenuOpen(false)}>
+                    <button
+                        type="button"
+                        className="mobile-menu-backdrop absolute inset-0 bg-black/40"
+                        aria-label="Close navigation menu"
+                    />
+                    <aside
+                        id="mobile-navigation-drawer"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Mobile navigation"
+                        className="mobile-menu-drawer absolute inset-y-0 left-0 flex w-[min(85vw,360px)] flex-col bg-white shadow-2xl"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="flex items-center justify-between border-b border-gray-100 px-5 py-5">
+                            <span className="text-base font-semibold text-gray-900">Menu</span>
+                            <button
+                                type="button"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                aria-label="Close navigation menu"
+                                className="grid h-9 w-9 place-items-center rounded text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                            >
+                                <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" d="m6 6 12 12M18 6 6 18" />
+                                </svg>
+                            </button>
+                        </div>
+                        <nav className="flex-1 overflow-y-auto px-5 py-4" aria-label="Mobile navigation links">
+                            <ul className="space-y-1">
+                                <li><Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block rounded px-3 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-primary-600">Home</Link></li>
+                                <li><Link href="/multikart-frontend/collections" onClick={() => setIsMobileMenuOpen(false)} className="block rounded px-3 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-primary-600">Collection</Link></li>
+                                <li><Link href="/multikart-frontend/products" onClick={() => setIsMobileMenuOpen(false)} className="block rounded px-3 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-primary-600">Product</Link></li>
+                                <li><Link href="/multikart-frontend/blogs" onClick={() => setIsMobileMenuOpen(false)} className="block rounded px-3 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-primary-600">Blogs</Link></li>
+                                <li><Link href="/multikart-frontend/pages" onClick={() => setIsMobileMenuOpen(false)} className="block rounded px-3 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-primary-600">Pages</Link></li>
+                            </ul>
+                        </nav>
+                    </aside>
                 </div>
             )}
         </header>

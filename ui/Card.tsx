@@ -231,7 +231,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                                     aria-hidden={isDuplicate || undefined}
                                 >
                                     {offers.map((offer, index) => (
-                                        <li key={`${index}-${offer}`}>
+                                        <li className=' mx-5' key={`${index}-${offer}`}>
                                             <span className="offer-icon">
                                                 <svg aria-hidden="true" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2a2 2 0 0 1 0-2.8l7.2-7.2a2 2 0 0 1 1.4-.6H19a2 2 0 0 1 2 2v7a2 2 0 0 1-.4 1.6Z" />

@@ -158,16 +158,31 @@ export default function ProductDetailPage() {
                         </div>
 
                         <div className="col-xl-4 lg:col-span-4 product-right product-description-box product-page-details">
-                            <div className="trending-text flex items-center gap-2 mb-2 text-sm text-orange-600">
-                                <span className="inline-block w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                                <h5>Selling fast! 3 people have this in their carts.</h5>
+                            <div className="trending-text flex items-center gap-2 mb-2 text-sm text-orange-600 mt-5">
+                                <img
+                                    src="	https://angular.pixelstrap.com/multikart-frontend/assets/images/trending.gif"
+                                    alt=" "
+                                    width={24}
+                                    height={24}
+                                    className="img-fluid"
+                                />                                <h5>Selling fast! 3 people have this in their carts.</h5>
                             </div>
                             <h2 className="main-title text-2xl font-bold text-gray-900 mb-2">Gym Coords Set (Blue)</h2>
 
                             <div className="product-rating flex items-center gap-2 text-yellow-500 mb-3">
-                                <div className="rating-list flex">
+                                <div className="rating-list flex items-center gap-1">
                                     {[...Array(5)].map((_, i) => (
-                                        <i key={i} className="ri-star-line"></i>
+                                        <svg
+                                            key={i}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            className="text-yellow-400"
+                                        >
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                        </svg>
                                     ))}
                                 </div>
                                 <span className="divider text-gray-300">|</span>
@@ -225,7 +240,7 @@ export default function ProductDetailPage() {
                                 </span>
                                 <div className="variation-box mb-4">
                                     <h4 className="sub-title font-semibold mb-2 text-gray-800">Colour:</h4>
-                                    <ul className="flex gap-3">
+                                    <ul className="flex gap-3 justify-center">
                                         {PRODUCT_VARIANTS.map((variant, index) => (
                                             <li key={variant.label} className="list-none">
                                                 <button
@@ -345,7 +360,7 @@ export default function ProductDetailPage() {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="row mb-6">
                         <div className="col-12 product-related">
-                            <h2 className="text-xl md:text-2xl font-bold text-gray-800 uppercase tracking-wide">
+                            <h2 className="text-xl md:text-2xl font-bold text-gray-800 uppercase tracking-wide mt-5">
                                 Related Products
                             </h2>
                         </div>

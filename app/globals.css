@@ -282,3 +282,61 @@ body {
   top: 120px;
   left: 0;
 }
+
+@keyframes mobile-menu-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-menu-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu-overlay {
+  animation: mobile-menu-fade-in 180ms ease-out both;
+}
+
+.mobile-menu-drawer {
+  animation: mobile-menu-slide-in 220ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .mobile-menu-overlay,
+  .mobile-menu-drawer {
+    animation: none;
+  }
+}
+
+.tap-top {
+  width: 40px;
+  height: 40px;
+  z-index: 8;
+  display: flex;
+  color: #fff;
+  text-align: center;
+  border: none;
+  font-size: 22px;
+  padding: 7px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: all .5s ease;
+}
+
+.tap-top:hover {
+  opacity: 0.8;
+  transform: translateY(-3px);
+}

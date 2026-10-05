@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { TopNavbar } from './TopNavbar';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { TapTop } from '@/components/layout/TapTop';
 // import { Cart } from '@/ui/Cart';
 
 interface MainLayoutProps {
@@ -34,7 +35,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
             {/* Global Footer */}
             <Footer />
-
+            <TapTop />
             {/* Global Cart Drawer */}
 
         </div>
